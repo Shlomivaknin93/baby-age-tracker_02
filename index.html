@@ -38,23 +38,23 @@
         function calculateAge(birthDate) {
             const today = new Date();
             const birth = new Date(birthDate);
-            let months = today.getMonth() - birth.getMonth() + (12 * (today.getFullYear() - birth.getFullYear()));
-            let days = today.getDate() - birth.getDate();
 
-            // אם מספר הימים של החודש הנוכחי קטן ממספר הימים בתאריך הלידה, נתקן את מספר החודשים
-            if (days < 0) {
-                months--;
-                const prevMonth = new Date(today.getFullYear(), today.getMonth() - 1, birth.getDate());
-                days = Math.floor((today - prevMonth) / (1000 * 60 * 60 * 24));
-            } else {
-                days = Math.floor((today - birth) / (1000 * 60 * 60 * 24)) % 30; // חישוב מספר הימים שנותרו
+            let ageMonths = today.getMonth() - birth.getMonth() + (12 * (today.getFullYear() - birth.getFullYear()));
+            let ageDays = today.getDate() - birth.getDate();
+
+            // אם הימים הנוכחיים פחות מהימים בתאריך הלידה, צריך להוריד חודש
+            if (ageDays < 0) {
+                ageMonths--;
+                const lastMonthDate = new Date(today.getFullYear(), today.getMonth() - 1, birth.getDate());
+                const daysInLastMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+                ageDays += daysInLastMonth;
             }
 
-            return `${months} months and ${days} days old`;
+            return `${ageMonths} months and ${ageDays} days old`;
         }
 
         // תאריך הלידה של הילדה
-        const birthDate = new Date(2024, 5, 2); // יוני
+        const birthDate = new Date(2024, 5, 2); // מאי
 
         // הכנסת סיסמה
         let password = prompt("Enter password:");
