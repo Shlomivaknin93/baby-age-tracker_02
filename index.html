@@ -39,18 +39,27 @@
             const today = new Date();
             const birth = new Date(birthDate);
 
-            let ageMonths = today.getMonth() - birth.getMonth() + (12 * (today.getFullYear() - birth.getFullYear()));
+            let ageYears = today.getFullYear() - birth.getFullYear();
+            let ageMonths = today.getMonth() - birth.getMonth();
             let ageDays = today.getDate() - birth.getDate();
 
-
-          
+            // תיקון גיל אם לא עברנו את התאריך ההולדת החודשי
+            if (ageDays < 0) {
+                ageMonths--;
+                ageDays += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
             }
 
-            return `${ageMonths} months and ${ageDays} days old`;
+            // תיקון גיל אם לא עברנו את החודש ההולדתי
+            if (ageMonths < 0) {
+                ageYears--;
+                ageMonths += 12;
+            }
+
+            return `${ageYears} years, ${ageMonths} months, and ${ageDays} days old`;
         }
 
         // תאריך הלידה של הילדה
-        const birthDate = new Date(2024, 5, 2); // מאי
+        const birthDate = '2024-05-02'; // תאריך לידה בפורמט YYYY-MM-DD
 
         // הכנסת סיסמה
         let password = prompt("Enter password:");
