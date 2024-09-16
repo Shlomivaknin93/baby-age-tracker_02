@@ -42,12 +42,8 @@
             let ageMonths = today.getMonth() - birth.getMonth() + (12 * (today.getFullYear() - birth.getFullYear()));
             let ageDays = today.getDate() - birth.getDate();
 
-            // אם הימים הנוכחיים פחות מהימים בתאריך הלידה, צריך להוריד חודש
-            if (ageDays < 0) {
-                ageMonths--;
-                const lastMonthDate = new Date(today.getFullYear(), today.getMonth() - 1, birth.getDate());
-                const daysInLastMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
-                ageDays += daysInLastMonth;
+
+          
             }
 
             return `${ageMonths} months and ${ageDays} days old`;
